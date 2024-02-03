@@ -27,7 +27,7 @@ AWS_S3_REGION_NAME = 'us-east-005'
 AWS_S3_ENDPOINT_URL = 'https://s3.us-east-005.backblazeb2.com'
 AWS_S3_FILE_OVERWRITE = False
 
-DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
+DEFAULT_FILE_STORAGE = 'storages.backends.backblaze_b2.B2Storage'
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
