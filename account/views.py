@@ -3,7 +3,9 @@ from .email_backend import EmailBackend
 from django.contrib import messages
 from .forms import CustomUserForm
 from voting.forms import VoterForm
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout,authenticate
+from .models import CustomUser
+
 # Create your views here.
 
 
@@ -16,8 +18,17 @@ def account_login(request):
 
     context = {}
     if request.method == 'POST':
-        user = EmailBackend.authenticate(request, username=request.POST.get(
-            'email'), password=request.POST.get('password'))
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        try:
+            user = CustomUser.objects.get(username=username)
+        except:
+            messages.error(request, "Username  not found")
+            return redirect('/')
+        
+        user = authenticate(request, username=username, password=password)
+
         if user != None:
             login(request, user)
             if user.user_type == '1':

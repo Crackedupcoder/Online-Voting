@@ -181,9 +181,14 @@ def updateVoter(request):
     if request.method != 'POST':
         messages.error(request, "Access Denied")
     try:
-        instance = Voter.objects.get(id=request.POST.get('id'))
-        user = CustomUserForm(request.POST or None, instance=instance.admin)
-        voter = VoterForm(request.POST or None, instance=instance)
+        voter = Voter.objects.get(id=request.POST.get('id'))
+        user = CustomUser.objects.get(id=voter.admin.id)
+        username = request.POST.get('username')
+        name = request.POST.get('name')
+
+        user.username = username
+        voter.name = name
+
         user.save()
         voter.save()
         messages.success(request, "Voter's bio updated")
