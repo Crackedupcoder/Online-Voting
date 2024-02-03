@@ -2,7 +2,7 @@ from .base import *
 import dj_database_url
 
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -31,8 +31,8 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'storages.backends.s3.S3Storage'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_HOST_USER = 'futmxlodge@gmail.com'
