@@ -50,9 +50,11 @@ INSTALLED_APPS = [
     'administrator.apps.AdministratorConfig',
 
     'storages',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -145,3 +147,7 @@ ELECTION_TITLE_PATH = os.path.join(
     BASE_DIR, 'election_title.txt')  # Election Title File
 
 SEND_OTP = False  # If you toggle this to False, Kindly use 0000 as your OTP
+
+INTERNAL_IPS = [
+ '127.0.0.1',
+] 
