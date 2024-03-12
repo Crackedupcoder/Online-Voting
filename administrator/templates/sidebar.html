@@ -8,7 +8,11 @@
         <img src="{% static 'images/userplaceholder.png' %}" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>{{ request.user.username }}</p>
+        {% if request.user.user_type == '1' %}
+        <p>{{ request.user}}</p>
+        {% else %}
+        <p>{{ voter.name}}</p>
+        {% endif %}
         <a><i class="fa fa-circle text-success"></i> Online</a>
       </div>
     </div>
@@ -16,7 +20,6 @@
     <ul class="sidebar-menu" data-widget="tree">
       {% if request.user.user_type == '1' %}
   
-      
       <li class="header">REPORTS</li>
       <li class=""><a href="{% url 'adminDashboard' %}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
       <li class="header">MANAGE</li>
