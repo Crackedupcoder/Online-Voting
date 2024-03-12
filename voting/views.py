@@ -41,8 +41,9 @@ def generate_ballot(display_controls=False):
                     instruction = "Select only one candidate"
                     input_box = '<input value="'+str(candidate.id)+'" type="radio" class="flat-red ' + \
                         position_name+'" name="'+position_name+'">'
-                image = "/media/" + str(candidate.photo)
-                candidates_data = candidates_data + '<li>' + input_box + '<button type="button" class="btn btn-primary btn-sm btn-flat clist platform" data-fullname="'+candidate.fullname+'" data-bio="'+candidate.bio+'"><i class="fa fa-search"></i> Platform</button><img src="' + \
+                image = candidate.photo.url
+                print(image)
+                candidates_data = candidates_data + '<li>' + input_box + '<button type="button" class="btn btn-primary btn-sm btn-flat clist platform" data-fullname="'+candidate.fullname+'" data-bio="'+candidate.bio+'"><i class="fa fa-search"></i> Manifesto</button><img src="' + \
                     image+'" height="100px" width="100px" class="clist"><span class="cname clist">' + \
                     candidate.fullname+'</span></li>'
             up = ''
@@ -237,12 +238,14 @@ def verify_otp(request):
 
 
 def show_ballot(request):
+    voter = Voter.objects.get(admin=request.user)
     if request.user.voter.voted:
         messages.error(request, "You have voted already")
         return redirect(reverse('voterDashboard'))
     ballot = generate_ballot(display_controls=False)
     context = {
-        'ballot': ballot
+        'ballot': ballot,
+        'voter':voter,
     }
     return render(request, "voting/voter/ballot.html", context)
 
