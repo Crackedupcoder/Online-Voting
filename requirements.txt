@@ -8,6 +8,7 @@ charset-normalizer==3.3.2
 cssselect2==0.7.0
 dj-database-url==2.1.0
 Django==5.0
+django-debug-toolbar==4.3.0
 django-environ==0.11.2
 django-renderpdf==4.0.0
 django-storages==1.14.2
